@@ -352,26 +352,36 @@ button {
   user-select: none;
 }
 
-.logo-badge {
-  width: 46px;
-  height: 46px;
-  background: linear-gradient(135deg, var(--dark-maroon), var(--deep-burgundy));
-  color: var(--white);
+/* LOGO IMAGE STYLING */
+.logo-img {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.25rem;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  box-shadow: 0 4px 14px rgba(123, 23, 28, 0.2);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-brand:hover .logo-img {
+  transform: rotate(-6deg) scale(1.08);
+  box-shadow: 0 6px 18px rgba(123, 23, 28, 0.3);
+}
+
+.footer-logo-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
   border: 2px solid var(--gold);
   box-shadow: 0 4px 14px rgba(123, 23, 28, 0.2);
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
-.logo-brand:hover .logo-badge {
-  transform: rotate(-6deg) scale(1.05);
+.footer-logo-img:hover {
+  transform: scale(1.05);
 }
 
 .brand-titles {
@@ -1903,11 +1913,7 @@ button {
   100% { box-shadow: 0 0 0 0 rgba(32, 166, 74, 0); }
 }
 
-/* =========================================================================
-   RESPONSIVE
-   ========================================================================= */
-
-/* Laptop / small desktop */
+/* RESPONSIVE */
 @media (max-width: 1200px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1924,7 +1930,6 @@ button {
   }
 }
 
-/* Tablet */
 @media (max-width: 900px) {
   .section-padding {
     padding: 72px 0;
@@ -1968,7 +1973,6 @@ button {
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .desktop-nav,
   .desktop-only {
@@ -2040,7 +2044,6 @@ button {
   }
 }
 
-/* Small mobile */
 @media (max-width: 420px) {
   .container {
     padding: 0 18px;
@@ -2076,7 +2079,6 @@ button {
   }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
