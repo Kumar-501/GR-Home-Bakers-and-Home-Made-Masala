@@ -83,8 +83,8 @@ const InstagramIcon = ({ size = 16, className = '' }) => (
 const WHATSAPP_NUMBER = '919443524677';
 const openWhatsApp = (productName = '') => {
   const message = productName
-    ? `Hi GR Home Bakers, I would like to order ${productName}.`
-    : `Hi GR Home Bakers, I would like to place an order.`;
+    ? `Hi GR Home Bakers Salem, I would like to order ${productName}.`
+    : `Hi GR Home Bakers Salem, I would like to place an order.`;
   window.open(
     `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
     '_blank',
@@ -167,7 +167,7 @@ const Reveal = ({ children, delay = 0, className = '', as = 'div' }) => {
   );
 };
 
-const SafeImage = ({ src, alt, className = '', fallbackEmoji = '🌿', fallbackLabel }) => {
+const SafeImage = ({ src, alt, className = '', fallbackEmoji = '🌿', fallbackLabel, isHero = false }) => {
   const [failed, setFailed] = useState(false);
 
   if (failed || !src) {
@@ -184,7 +184,7 @@ const SafeImage = ({ src, alt, className = '', fallbackEmoji = '🌿', fallbackL
       src={src}
       alt={alt}
       className={className}
-      loading="lazy"
+      loading={isHero ? 'eager' : 'lazy'}
       onError={() => setFailed(true)}
     />
   );
@@ -263,7 +263,7 @@ const ThemeSwitcher = ({ theme, setTheme, variant = 'header' }) => {
 };
 
 // ---------------------------------------------------------------------------
-// DATA WITH UPDATED BAKERY & MASALA PRODUCT PATHS
+// DATA WITH SEO ALT TEXTS & DESCRIPTIONS
 // ---------------------------------------------------------------------------
 const bakeryProducts = [
   {
@@ -275,8 +275,9 @@ const bakeryProducts = [
       { size: '1 kg', price: '₹1,000' },
     ],
     image: darkChocolateBrownieImg,
-    description: 'Rich, moist & fudgy — loaded with real dark chocolate and baked fresh to order.',
-    tags: ['Fudgy', 'Egg & Eggless Options', 'Pure Chocolate'],
+    altText: 'Fresh homemade dark chocolate brownie made in Salem by GR Home Bakers',
+    description: 'Rich, moist & fudgy homemade brownies loaded with real dark chocolate, baked fresh in Salem for every order.',
+    tags: ['Fudgy Brownies', 'Egg & Eggless', 'Salem Home Bakery'],
     fallbackEmoji: '🍫',
   },
   {
@@ -288,8 +289,9 @@ const bakeryProducts = [
       { size: '1 kg', price: '₹1,100' },
     ],
     image: whiteChocolateBlondiesImg,
-    description: 'Soft, chewy & perfectly sweet with rich white choco chunks baked into every bite.',
-    tags: ['Chewy', 'Vanilla & Butter', 'Melt-in-mouth'],
+    altText: 'Soft white chocolate blondies baked fresh at GR Home Bakers in Salem',
+    description: 'Soft, chewy & perfectly sweet homemade white chocolate blondies with premium choco chunks baked in Salem.',
+    tags: ['Chewy Blondies', 'Vanilla & Butter', 'Freshly Baked'],
     fallbackEmoji: '🍪',
   },
   {
@@ -301,8 +303,9 @@ const bakeryProducts = [
       { size: '500g', price: '₹480' },
     ],
     image: wheatChocoChipCookiesImg,
-    description: 'Healthy & tasty whole wheat cookies packed generously with premium dark choco chips.',
-    tags: ['Whole Wheat', 'Crunchy', 'Preservative-Free'],
+    altText: 'Healthy whole wheat chocolate chip cookies made fresh in Salem',
+    description: 'Healthy & crispy whole wheat cookies loaded with dark choco chips, baked in Salem without added preservatives.',
+    tags: ['Whole Wheat', 'Healthy Cookies', 'Preservative-Free'],
     fallbackEmoji: '🍪',
   },
   {
@@ -311,8 +314,9 @@ const bakeryProducts = [
     badge: 'GIFTING PICK',
     prices: [{ size: 'Custom Box', price: 'from ₹350' }],
     image: homemadeChocolatesImg,
-    description: 'Handcrafted artisanal chocolates made with the finest cocoa for pure chocolate delight.',
-    tags: ['Custom Boxes', 'Artisanal', 'Perfect Gift'],
+    altText: 'Custom artisanal homemade chocolates box from GR Home Bakers Salem',
+    description: 'Handcrafted artisanal chocolates made with rich cocoa for custom gifting and celebrations in Salem.',
+    tags: ['Custom Boxes', 'Artisanal Chocolates', 'Gift Hampers Salem'],
     fallbackEmoji: '🍬',
   },
 ];
@@ -320,30 +324,48 @@ const bakeryProducts = [
 const mainMasalaProducts = [
   {
     id: 'm0',
-    name: 'Idly Maavu (Idly Batter Premix)',
+    name: 'Idly Maavu & Batter Premix',
     icon: '🍚',
     badge: 'Min Order: 5 kg',
-    slogan: 'Softest idlis & crispest dosas, freshly ground on order.',
+    slogan: 'Softest idlis & crispest dosas in Salem, ground fresh on order.',
     prices: [{ size: '5 kg', price: '₹780' }],
     image: idlyBatterImg,
+    altText: 'Fresh homemade Idly Maavu batter freshly prepared in Salem',
     description:
-      'Freshly ground traditional rice & urad dal batter premix, naturally prepared without added preservatives.',
+      'Freshly ground traditional rice & urad dal batter in Salem, 100% natural without added preservatives for soft idlis.',
     fallbackEmoji: '🍚',
     minOrder: true,
+  },
+  {
+    id: 'm00',
+    name: 'Traditional Idiyappam Maavu',
+    icon: '🌾',
+    badge: '100% Natural',
+    slogan: 'Soft, delicate & authentic homemade Idiyappam flour.',
+    prices: [
+      { size: '500g', price: '₹120' },
+      { size: '1 kg', price: '₹230' },
+    ],
+    image: sathumaavuKanjiImg,
+    altText: 'Authentic traditional Idiyappam Maavu flour prepared in Salem',
+    description:
+      'Premium steam-processed rice flour prepared specifically for soft, non-sticky traditional South Indian Idiyappam in Salem.',
+    fallbackEmoji: '🌾',
   },
   {
     id: 'm1',
     name: 'Sambar Podi',
     icon: '🌶️',
     badge: '100% Natural',
-    slogan: "One spoon, and it's Amma's kitchen again.",
+    slogan: "One spoon, and it's Amma's kitchen again in Salem.",
     prices: [
       { size: '500g', price: '₹290' },
       { size: '1 kg', price: '₹580' },
     ],
     image: sambarPowderImg,
+    altText: 'Authentic homemade Sambar Podi spice powder prepared in Salem',
     description:
-      'Traditional homemade sambar powder prepared with carefully selected spices for rich aroma and authentic flavour.',
+      'Traditional homemade sambar podi prepared with hand-selected spices in Salem for rich aroma and authentic Tamil taste.',
     fallbackEmoji: '🌶️',
   },
   {
@@ -351,14 +373,15 @@ const mainMasalaProducts = [
     name: 'Kulambu Milagai Podi',
     icon: '🌶️',
     badge: '100% Natural',
-    slogan: 'The secret behind every soul-warming kuzhambu.',
+    slogan: 'The secret behind every soul-warming kuzhambu in Tamil Nadu.',
     prices: [
       { size: '500g', price: '₹280' },
       { size: '1 kg', price: '₹560' },
     ],
     image: kulambuMilagaiPowderImg,
+    altText: 'Traditional Tamil Kulambu Milagai Podi spice blend made in Salem',
     description:
-      'A traditional Tamil-style spice blend for flavourful kuzhambu, made with carefully hand-roasted spices.',
+      'Traditional Tamil-style curry spice powder crafted in Salem with hand-roasted chillies and coriander seeds.',
     fallbackEmoji: '🌶️',
   },
   {
@@ -366,14 +389,15 @@ const mainMasalaProducts = [
     name: 'Red Chilli Powder (Vara Milagai Podi)',
     icon: '🔥',
     badge: '100% Natural',
-    slogan: 'Fiery, fragrant & fried-rice ready.',
+    slogan: 'Fiery, fragrant & stone-ground fresh in Salem.',
     prices: [
       { size: '500g', price: '₹280' },
       { size: '1 kg', price: '₹560' },
     ],
     image: redChilliPowderImg,
+    altText: 'Pure stone ground red chilli powder vara milagai podi from Salem',
     description:
-      'Aromatic dry chilli spice blend with the perfect balance of heat and traditional stone-ground flavour.',
+      'Aromatic dry red chilli spice blend made from premium chillies, stone-ground in Salem with balanced heat.',
     fallbackEmoji: '🔥',
   },
   {
@@ -381,14 +405,15 @@ const mainMasalaProducts = [
     name: 'Kothamalli Podi (Vara Kothamalli)',
     icon: '🌿',
     badge: '100% Natural',
-    slogan: 'Fresh coriander magic, stone-ground for real flavour.',
+    slogan: 'Fresh coriander magic, stone-ground for real flavor.',
     prices: [
       { size: '500g', price: '₹235' },
       { size: '1 kg', price: '₹560' },
     ],
     image: kothamalliPodiImg,
+    altText: 'Fresh homemade Kothamalli Podi coriander spice powder in Salem',
     description:
-      'Freshly prepared coriander-based spice powder with rich aroma and authentic homemade taste.',
+      'Freshly prepared coriander-based spice powder milled in Salem for authentic rich aroma and traditional taste.',
     fallbackEmoji: '🌿',
   },
   {
@@ -396,15 +421,16 @@ const mainMasalaProducts = [
     name: 'Turmeric Powder',
     icon: '🟠',
     badge: '100% Natural',
-    slogan: 'Pure gold from the earth, stone-ground for real curcumin power.',
+    slogan: 'Pure gold from the earth, stone-ground in Salem for curcumin power.',
     prices: [
       { size: '250g', price: '₹95' },
       { size: '500g', price: '₹190' },
       { size: '1 kg', price: '₹365' },
     ],
     image: turmericPowderImg,
+    altText: 'High curcumin stone ground turmeric powder made fresh in Salem',
     description:
-      'High-curcumin turmeric, sun-dried and stone-ground the traditional way for rich colour and aroma.',
+      'High-curcumin turmeric, sun-dried and stone-ground in Salem for vibrant natural color and maximum health benefits.',
     fallbackEmoji: '🟠',
   },
   {
@@ -412,14 +438,15 @@ const mainMasalaProducts = [
     name: 'Black Pepper Powder',
     icon: '⚫',
     badge: '100% Natural',
-    slogan: 'The king of spices, freshly cracked for real heat.',
+    slogan: 'The king of spices, freshly cracked for real heat in Salem.',
     prices: [
       { size: '250g', price: '₹270' },
       { size: '500g', price: '₹530' },
     ],
     image: blackPepperPowderImg,
+    altText: 'Freshly cracked pure black pepper powder prepared in Salem',
     description:
-      'Sun-dried whole peppercorns, stone-ground fresh on order for a sharper, fragrant bite.',
+      'Sun-dried whole peppercorns stone-ground fresh on order in Salem for a sharp, fragrant bite.',
     fallbackEmoji: '⚫',
   },
   {
@@ -433,24 +460,26 @@ const mainMasalaProducts = [
       { size: '500g', price: '₹570' },
     ],
     image: whitePepperImg,
+    altText: 'Natural stone ground white pepper powder made in Salem',
     description:
-      'Milder and earthier than black pepper, perfect for light gravies, soups and white sauces.',
+      'Milder and earthier than black pepper, perfect for white gravies, soups and mild South Indian dishes.',
     fallbackEmoji: '⚪',
   },
   {
     id: 'm8',
-    name: 'Idly Podi',
+    name: 'Idly Podi (Gunpowder)',
     icon: '🍛',
     badge: '100% Natural',
-    slogan: "Idli's best friend — nutty, spicy and stone-ground perfect.",
+    slogan: "Idli's best friend — nutty, spicy and stone-ground in Salem.",
     prices: [
       { size: '250g', price: '₹125' },
       { size: '500g', price: '₹240' },
       { size: '1 kg', price: '₹460' },
     ],
     image: idlyPowderImg,
+    altText: 'Traditional homemade Idly Podi gunpowder made in Salem',
     description:
-      'A classic lentil & chilli gunpowder blend, roasted and ground fresh — just mix with sesame oil.',
+      'Classic lentil & chilli gunpowder blend, roasted and ground fresh in Salem — just add gingelly oil or ghee.',
     fallbackEmoji: '🍛',
   },
   {
@@ -464,8 +493,9 @@ const mainMasalaProducts = [
       { size: '1 kg', price: '₹600' },
     ],
     image: rasamPowderImg,
+    altText: 'Authentic South Indian Rasam Podi spice mix made in Salem',
     description:
-      'Aromatic, digestion-friendly spice blend roasted the traditional way — base of South Indian rasam.',
+      'Aromatic, digestion-friendly spice blend roasted the traditional way in Salem for authentic rasam.',
     fallbackEmoji: '🍲',
   },
   {
@@ -479,8 +509,9 @@ const mainMasalaProducts = [
       { size: '1 kg', price: '₹450' },
     ],
     image: sathumaavuKanjiImg,
+    altText: 'Healthy multi-grain Sathumaavu Kanji health mix made in Salem',
     description:
-      'Wholesome multi-grain health mix, slow-roasted and stone-ground — cook with milk or water.',
+      'Wholesome multi-grain health mix, slow-roasted and stone-ground in Salem — cook with milk or water.',
     fallbackEmoji: '🥣',
   },
   {
@@ -494,8 +525,9 @@ const mainMasalaProducts = [
       { size: '500g', price: '₹390' },
     ],
     image: karuppuKavuniKanjiImg,
+    altText: 'Antioxidant rich Karuppu Kavuni black rice kanji mix made in Salem',
     description:
-      'Stone-ground black kavuni rice premix, naturally rich in antioxidants — deeply flavourful.',
+      'Stone-ground black kavuni rice premix made in Salem, naturally rich in antioxidants and deep flavor.',
     fallbackEmoji: '🥣',
   },
   {
@@ -503,14 +535,15 @@ const mainMasalaProducts = [
     name: 'Uluthan Kanji Mix',
     icon: '🥣',
     badge: '100% Natural',
-    slogan: 'Protein-rich warmth, the way ammachi made it.',
+    slogan: 'Protein-rich warmth, the way traditional home kitchens make it.',
     prices: [
       { size: '250g', price: '₹95' },
       { size: '500g', price: '₹185' },
     ],
     image: uluthanKanjiImg,
+    altText: 'Traditional black gram Uluthan Kanji health premix made in Salem',
     description:
-      'Traditional black gram (uluthan) premix, rich in protein — roasted and ground fresh.',
+      'Traditional black gram (uluthan) health mix, rich in protein — roasted and ground fresh in Salem.',
     fallbackEmoji: '🥣',
   },
   {
@@ -521,6 +554,7 @@ const mainMasalaProducts = [
     slogan: 'Crispy, protein-rich dosas in minutes.',
     prices: [{ size: '500g', price: '₹190' }],
     image: multiDosaGrainImg,
+    altText: 'Protein-rich multi grain dosa flour premix in Salem',
     description:
       'Healthy multi-grain dosa flour blend prepared with protein-packed grains for golden crispy dosas.',
     fallbackEmoji: '🥞',
@@ -533,6 +567,7 @@ const mainMasalaProducts = [
     slogan: 'Authentic temple-style Venpongal made easy.',
     prices: [{ size: '500g', price: '₹180' }],
     image: venpongalPremixImg,
+    altText: 'Temple-style Venpongal rice and lentil premix made in Salem',
     description:
       'Traditional rice & moong dal premix with cumin, pepper & ghee aroma ready for quick home cooking.',
     fallbackEmoji: '🍲',
@@ -542,9 +577,10 @@ const mainMasalaProducts = [
     name: 'Millet Pongal Premix',
     icon: '🌾',
     badge: 'Customisable',
-    slogan: 'Healthy millet comfort, cooked in minutes.',
+    slogan: 'Healthy millet comfort, cooked in minutes in Salem.',
     prices: [{ size: '500g', price: 'Customisable' }],
     image: milletPongalPremixImg,
+    altText: 'Nutritious millet pongal health mix made in Salem',
     description:
       'Nutritious millet-based pongal mix tailored with your choice of foxtail, kodo, or barnyard millet.',
     fallbackEmoji: '🌾',
@@ -561,7 +597,7 @@ const TRAIL_IMAGES = [
 ];
 
 // ---------------------------------------------------------------------------
-// HEADER
+// HEADER COMPONENT
 // ---------------------------------------------------------------------------
 const NAV_ITEMS = [
   { id: 'bakes', label: 'Bakes' },
@@ -596,16 +632,16 @@ const Header = ({ theme, setTheme, scrollToSection }) => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           role="button"
           tabIndex={0}
-          aria-label="Back to top"
+          aria-label="GR Home Bakers Salem - Back to top"
         >
-          <img src={logoImg} alt="GR Home Bakers Logo" className="logo-img" />
+          <img src={logoImg} alt="GR Home Bakers & Home Made Masala Salem Logo" className="logo-img" />
           <div className="brand-titles">
             <span className="brand-main">GR Home Bakers</span>
-            <span className="brand-sub">&amp; HOME MADE MASALA</span>
+            <span className="brand-sub">&amp; HOME MADE MASALA · SALEM</span>
           </div>
         </motion.div>
 
-        <nav className="desktop-nav" aria-label="Primary">
+        <nav className="desktop-nav" aria-label="Main Navigation">
           {NAV_ITEMS.map((item, idx) => (
             <motion.button
               key={item.id}
@@ -625,7 +661,7 @@ const Header = ({ theme, setTheme, scrollToSection }) => {
           <MagneticButton
             onClick={() => openWhatsApp()}
             className="phone-btn desktop-only"
-            aria-label="Call or WhatsApp us"
+            aria-label="Call or WhatsApp GR Home Bakers Salem"
           >
             <Phone className="btn-icon-sm" />
             <span>9443524677</span>
@@ -697,508 +733,502 @@ export default function App() {
       <CustomCursor />
       <Header theme={theme} setTheme={setTheme} scrollToSection={scrollToSection} />
 
-      {/* HERO SECTION */}
-      <section className="hero-section">
-        <FloatingParticles />
-        <div className="hero-glow" aria-hidden="true" />
-        <div className="container hero-grid">
-          <div className="hero-content">
-            <div className="pill-badge reveal-in">
-              <Sparkles size={14} className="pill-icon" />
-              <span>2 BRANDS · 1 KITCHEN · SALEM</span>
-            </div>
-
-            <h1 className="hero-title">
-              <SplitText
-                text="Taste the love in every bite — and every spoonful."
-                highlightWords={['bite', 'spoonful']}
-                delay={100}
-              />
-            </h1>
-
-            <p className="hero-description">
-              Fudgy brownies, chewy blondies and wheat cookies from{' '}
-              <strong>GR Home Bakers</strong>, plus fresh Idly Maavu (batter), pure
-              stone-ground powders and traditional kanji premixes from{' '}
-              <strong>GR Home Made Masala</strong>. Homemade with love, prepared for
-              happiness.
-            </p>
-
-            <div className="hero-buttons">
-              <MagneticButton onClick={() => openWhatsApp()} className="btn-primary">
-                <MessageCircle size={18} />
-                Order on WhatsApp
-              </MagneticButton>
-              <button
-                onClick={() => scrollToSection('masala')}
-                className="btn-secondary"
-              >
-                Shop masala &amp; batter
-              </button>
-            </div>
-
-            <div className="hero-trust-grid">
-              <div className="trust-card">
-                <Scale className="trust-icon" />
-                <div className="trust-text">
-                  <strong>Delivery by weight</strong>
-                  <span>Standard charges apply</span>
-                </div>
+      <main>
+        {/* HERO SECTION */}
+        <section className="hero-section">
+          <FloatingParticles />
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="container hero-grid">
+            <div className="hero-content">
+              <div className="pill-badge reveal-in">
+                <Sparkles size={14} className="pill-icon" />
+                <span>BEST HOME BAKERY &amp; MASALAS IN SALEM, TAMIL NADU</span>
               </div>
-              <div className="trust-card">
-                <Heart className="trust-icon" />
-                <div className="trust-text">
-                  <strong>Made on order</strong>
-                  <span>Always fresh</span>
-                </div>
-              </div>
-              <div className="trust-card">
-                <ShieldCheck className="trust-icon" />
-                <div className="trust-text">
-                  <strong>FSSAI registered</strong>
-                  <span>Reg No. 224680000279</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div className="hero-visual">
-            <TiltCard className="hero-image-wrapper">
-              <div className="hero-image-frame">
-                <SafeImage
-                  src={HERO_IMAGE}
-                  alt="Freshly baked chocolate brownie drizzled with love"
-                  className="hero-img"
-                  fallbackEmoji="🎂"
-                  fallbackLabel="GR Home Bakers"
+              <h1 className="hero-title">
+                <SplitText
+                  text="Homemade Bakes & Traditional Masalas in Salem"
+                  highlightWords={['Bakes', 'Masalas', 'Salem']}
+                  delay={100}
                 />
-              </div>
+              </h1>
 
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="hero-floating-badge"
-              >
-                <div className="hero-float-inner">
-                  <Heart size={16} />
-                  <span>Baked fresh</span>
-                  <small>on order</small>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="hero-floating-rating"
-              >
-                <div className="rating-stars">
-                  <Star size={14} className="star-filled" />
-                  <Star size={14} className="star-filled" />
-                  <Star size={14} className="star-filled" />
-                  <Star size={14} className="star-filled" />
-                  <Star size={14} className="star-filled" />
-                </div>
-                <span>Loved in Salem</span>
-              </motion.div>
-            </TiltCard>
-          </div>
-        </div>
-
-        <div className="hero-wave" aria-hidden="true">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <path
-              d="M0,60 C240,100 480,20 720,50 C960,80 1200,30 1440,60 L1440,100 L0,100 Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-      </section>
-
-      {/* MARQUEE STRIP */}
-      <div className="marquee-strip">
-        <div className="marquee-content">
-          <span>WITH LOVE</span>
-          <span>FRESHLY BAKED EVERYDAY</span>
-          <span>FRESH IDLY MAAVU (MIN 5KG)</span>
-          <span>DELIVERY CHARGES APPLICABLE AS PER WEIGHT</span>
-          <span>EGG &amp; EGGLESS OPTIONS</span>
-          <span>NO PRESERVATIVES</span>
-          <span>PRE-ORDERS TAKEN</span>
-          <span>POWDERS DELIVERED WITHIN 7 DAYS</span>
-          <span>WITH LOVE</span>
-          <span>FRESHLY BAKED EVERYDAY</span>
-          <span>FRESH IDLY MAAVU (MIN 5KG)</span>
-          <span>DELIVERY CHARGES APPLICABLE AS PER WEIGHT</span>
-          <span>EGG &amp; EGGLESS OPTIONS</span>
-        </div>
-      </div>
-
-      {/* BAKERY SECTION */}
-      <section id="bakes" className="section-padding bakes-section">
-        <ImageTrail images={TRAIL_IMAGES} className="container">
-          <Reveal className="section-header text-center">
-            <span className="brand-tag">GR HOME BAKERS</span>
-            <h2 className="section-title">Our Bakery Specialties</h2>
-            <p className="section-subtitle">
-              Baked fresh on order with premium ingredients — available in both egg and
-              eggless options.
-            </p>
-          </Reveal>
-
-          <div className="products-grid">
-            {bakeryProducts.map((product, i) => (
-              <Reveal delay={i * 90} key={product.id} as="article">
-                <TiltCard className="product-card">
-                  <div className="card-image-box">
-                    <span className="product-badge">{product.badge}</span>
-                    <SafeImage
-                      src={product.image}
-                      alt={product.name}
-                      className="product-img"
-                      fallbackEmoji={product.fallbackEmoji}
-                    />
-                    <div className="card-image-overlay" />
-                  </div>
-                  <div className="card-content">
-                    <h3 className="card-title">{product.name}</h3>
-                    <p className="card-desc">{product.description}</p>
-
-                    <div className="price-tag-list">
-                      {product.prices.map((pTier) => (
-                        <div key={pTier.size} className="price-pill">
-                          <span className="price-size">{pTier.size}</span>
-                          <span className="price-val">{pTier.price}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="tag-list">
-                      {product.tags?.map((t) => (
-                        <span key={t} className="mini-tag">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => openWhatsApp(`${product.name} (${product.prices[0]?.price})`)}
-                      className="card-cta-btn"
-                    >
-                      Order this <ChevronRight size={16} />
-                    </button>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </ImageTrail>
-      </section>
-
-      {/* CELEBRATION SECTION */}
-      <section className="section-padding celebration-section">
-        <div className="container">
-          <Reveal className="celebration-card">
-            <div className="celebration-left">
-              <div className="pill-badge gold-pill">
-                <Gift size={14} />
-                <span>SPECIAL GIFTING</span>
-              </div>
-              <h2 className="celebration-title">Birthday brownie &amp; blondie boxes</h2>
-              <p className="celebration-desc">
-                Custom message on top, party-ready packing and gift wrapping.
-                Pre-orders taken — share the date on WhatsApp and we bake it fresh for you.
+              <p className="hero-description">
+                Order freshly baked fudgy chocolate brownies, chewy blondies, and whole wheat cookies from{' '}
+                <strong>GR Home Bakers in Salem</strong>. Discover pure stone-ground spice powders,
+                fresh Idly Maavu (batter), traditional <strong>Idiyappam Maavu</strong>, and healthy kanji premixes made by{' '}
+                <strong>GR Home Made Masala</strong>. Prepared fresh on order with pure ingredients and zero preservatives.
               </p>
-              <MagneticButton
-                onClick={() => openWhatsApp('Celebration Brownie Box')}
-                className="btn-primary"
-              >
-                <MessageCircle size={18} />
-                Pre-order a celebration box
-              </MagneticButton>
-            </div>
 
-            <div className="celebration-right-grid">
-              {[
-                { icon: Calendar, label: 'Birthdays' },
-                { icon: Sparkles, label: 'Celebrations' },
-                { icon: Gift, label: 'Return gifts' },
-                { icon: Star, label: 'Special occasions' },
-              ].map((box, i) => (
-                <Reveal delay={i * 80} key={box.label} className="feature-mini-box">
-                  <box.icon className="box-icon" />
-                  <h4>{box.label}</h4>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+              <div className="hero-buttons">
+                <MagneticButton onClick={() => openWhatsApp('Fresh Order')} className="btn-primary">
+                  <MessageCircle size={18} />
+                  Order on WhatsApp
+                </MagneticButton>
+                <button
+                  onClick={() => scrollToSection('masala')}
+                  className="btn-secondary"
+                >
+                  Shop masala &amp; batter
+                </button>
+              </div>
 
-      {/* MASALA INTRO SECTION */}
-      <section id="masala" className="section-padding masala-hero-section">
-        <div className="container">
-          <Reveal className="masala-intro-grid">
-            <div className="masala-img-column">
-              <TiltCard className="masala-img-wrapper">
-                <SafeImage
-                  src={MASALA_INTRO_IMAGE}
-                  alt="Traditional South Indian spices and masalas"
-                  className="masala-main-img"
-                  fallbackEmoji="🌶️"
-                  fallbackLabel="GR Home Made Masala"
-                />
-                <div className="gold-stamp">
-                  <span>100%</span>
-                  <small>HOMEMADE</small>
+              <div className="hero-trust-grid">
+                <div className="trust-card">
+                  <Scale className="trust-icon" />
+                  <div className="trust-text">
+                    <strong>Delivery by weight</strong>
+                    <span>Standard charges apply</span>
+                  </div>
                 </div>
+                <div className="trust-card">
+                  <Heart className="trust-icon" />
+                  <div className="trust-text">
+                    <strong>Made on order</strong>
+                    <span>100% Fresh in Salem</span>
+                  </div>
+                </div>
+                <div className="trust-card">
+                  <ShieldCheck className="trust-icon" />
+                  <div className="trust-text">
+                    <strong>FSSAI registered</strong>
+                    <span>Reg No. 224680000279</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-visual">
+              <TiltCard className="hero-image-wrapper">
+                <div className="hero-image-frame">
+                  <SafeImage
+                    src={HERO_IMAGE}
+                    alt="Freshly baked chocolate brownie in Salem from GR Home Bakers"
+                    className="hero-img"
+                    fallbackEmoji="🎂"
+                    fallbackLabel="GR Home Bakers Salem"
+                    isHero={true}
+                  />
+                </div>
+
+                <motion.div
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                  className="hero-floating-badge"
+                >
+                  <div className="hero-float-inner">
+                    <Heart size={16} />
+                    <span>Baked fresh</span>
+                    <small>in Salem</small>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+                  className="hero-floating-rating"
+                >
+                  <div className="rating-stars">
+                    <Star size={14} className="star-filled" />
+                    <Star size={14} className="star-filled" />
+                    <Star size={14} className="star-filled" />
+                    <Star size={14} className="star-filled" />
+                    <Star size={14} className="star-filled" />
+                  </div>
+                  <span>Loved in Salem, TN</span>
+                </motion.div>
               </TiltCard>
             </div>
+          </div>
 
-            <div className="masala-content-column">
-              <span className="brand-tag masala-tag">GR HOME MADE MASALA</span>
-              <h2 className="section-title masala-title">
-                <SplitText text="Pure · Natural · Homemade" delay={80} />
-              </h2>
-              <p className="section-subtitle masala-desc">
-                Fresh Idly Maavu (batter), traditional powders and kanji premixes made in
-                small batches, exactly the way our grandmothers made them — no
-                preservatives, no colours, no shortcuts.
-              </p>
+          <div className="hero-wave" aria-hidden="true">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+              <path
+                d="M0,60 C240,100 480,20 720,50 C960,80 1200,30 1440,60 L1440,100 L0,100 Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </section>
 
-              <ul className="masala-benefits-list">
-                {[
-                  'No preservatives or artificial chemicals',
-                  'Fresh Idly Maavu / Batter (Min order: 5 kg — ₹780)',
-                  'Hygienically prepared in clean home kitchen',
-                  'Delivery charges applicable according to weight',
-                ].map((text, i) => (
-                  <motion.li
-                    key={text}
-                    initial={{ opacity: 0, x: -15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * i, duration: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    <CheckCircle2 className="benefit-icon" /> {text}
-                  </motion.li>
-                ))}
-              </ul>
+        {/* MARQUEE STRIP */}
+        <div className="marquee-strip" aria-hidden="true">
+          <div className="marquee-content">
+            <span>HOMEMADE IN SALEM</span>
+            <span>FRESHLY BAKED EVERYDAY</span>
+            <span>FRESH IDLY MAAVU &amp; IDIYAPPAM MAAVU</span>
+            <span>TRADITIONAL HOMEMADE MASALAS SALEM</span>
+            <span>NO ADDED PRESERVATIVES</span>
+            <span>CUSTOM CAKES &amp; GIFT BOXES</span>
+            <span>DELIVERY CHARGES APPLICABLE BY WEIGHT</span>
+            <span>HOMEMADE IN SALEM</span>
+            <span>FRESHLY BAKED EVERYDAY</span>
+          </div>
+        </div>
 
-              <div className="masala-cta-group">
-                <MagneticButton
-                  onClick={() => openWhatsApp('Masala Order')}
-                  className="btn-gold"
-                >
-                  Pre-order products
-                </MagneticButton>
-                <div className="delivery-badge-pill">
-                  <Truck size={16} />
-                  <span>DELIVERY CHARGES AS PER WEIGHT</span>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* MASALA PRODUCTS SHOWCASE */}
-          <div className="masala-products-wrapper">
+        {/* BAKERY SECTION */}
+        <section id="bakes" className="section-padding bakes-section">
+          <ImageTrail images={TRAIL_IMAGES} className="container">
             <Reveal className="section-header text-center">
-              <h3 className="sub-section-title">Fresh Batter, Spices &amp; Kanji Premixes</h3>
+              <span className="brand-tag">GR HOME BAKERS SALEM</span>
+              <h2 className="section-title">Fresh Homemade Bakery Products</h2>
               <p className="section-subtitle">
-                Freshly prepared and stone-ground traditional recipes for authentic
-                everyday meals.
+                Baked fresh on order in Salem with rich premium ingredients — available in both egg and
+                eggless custom options.
               </p>
             </Reveal>
 
-            {/* WEIGHT NOTICE BANNER */}
-            <div className="weight-notice-banner">
-              <Info size={18} className="notice-icon" />
-              <span>
-                <strong>Note:</strong> Delivery charges are applicable according to total order package weight.
-              </span>
-            </div>
-
-            <div className="masala-grid">
-              {mainMasalaProducts.map((masala, i) => (
-                <Reveal delay={(i % 4) * 80} key={masala.id} as="article">
-                  <TiltCard className="masala-card">
-                    <div className="masala-card-img-box">
+            <div className="products-grid">
+              {bakeryProducts.map((product, i) => (
+                <Reveal delay={i * 90} key={product.id} as="article">
+                  <TiltCard className="product-card">
+                    <div className="card-image-box">
+                      <span className="product-badge">{product.badge}</span>
                       <SafeImage
-                        src={masala.image}
-                        alt={masala.name}
-                        className="masala-img"
-                        fallbackEmoji={masala.fallbackEmoji}
+                        src={product.image}
+                        alt={product.altText}
+                        className="product-img"
+                        fallbackEmoji={product.fallbackEmoji}
                       />
-                      <span className="nature-badge">
-                        <Leaf size={12} /> {masala.badge}
-                      </span>
-                      <div className="masala-card-overlay" />
+                      <div className="card-image-overlay" />
                     </div>
+                    <div className="card-content">
+                      <h3 className="card-title">{product.name}</h3>
+                      <p className="card-desc">{product.description}</p>
 
-                    <div className="masala-card-body">
-                      <div className="masala-header-row">
-                        <span className="masala-emoji">{masala.icon}</span>
-                        <h4 className="masala-card-title">{masala.name}</h4>
-                      </div>
-                      <p className="masala-card-slogan">"{masala.slogan}"</p>
-                      <p className="masala-card-desc">{masala.description}</p>
-
-                      {/* PRICES DISPLAY */}
-                      <div className="price-tag-list masala-price-list">
-                        {masala.prices.map((pTier) => (
-                          <div key={pTier.size} className="price-pill masala-pill">
+                      <div className="price-tag-list">
+                        {product.prices.map((pTier) => (
+                          <div key={pTier.size} className="price-pill">
                             <span className="price-size">{pTier.size}</span>
                             <span className="price-val">{pTier.price}</span>
                           </div>
                         ))}
                       </div>
 
-                      <div className="masala-purity-tags">
-                        <span>✓ 100% Natural Spice</span>
-                        <span>✓ No Added Preservatives</span>
-                        <span>
-                          {masala.minOrder ? '✓ Min Order: 5 kg' : '✓ Prepared Fresh'}
-                        </span>
+                      <div className="tag-list">
+                        {product.tags?.map((t) => (
+                          <span key={t} className="mini-tag">
+                            {t}
+                          </span>
+                        ))}
                       </div>
-
                       <button
-                        onClick={() => openWhatsApp(masala.name)}
-                        className="masala-order-btn"
+                        onClick={() => openWhatsApp(`${product.name} (${product.prices[0]?.price})`)}
+                        className="card-cta-btn"
+                        aria-label={`Order ${product.name} on WhatsApp`}
                       >
-                        <MessageCircle size={16} />
-                        Order on WhatsApp
+                        Order Fresh Brownies on WhatsApp <ChevronRight size={16} />
                       </button>
                     </div>
                   </TiltCard>
                 </Reveal>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </ImageTrail>
+        </section>
 
-      {/* DELIVERY INFO SECTION */}
-      <section className="section-padding delivery-info-section">
-        <div className="container">
-          <Reveal className="delivery-info-card">
-            <div className="delivery-header">
-              <div className="days-badge-circle">
-                <span>7</span>
-                <small>DAYS</small>
-              </div>
-              <div className="delivery-title-area">
-                <h2>Order any powder or batter — delivered within 7 days</h2>
-                <p>
-                  We prepare fresh batches upon order to maintain maximum aroma, softness
-                  &amp; nutritional value. Delivery charges applicable according to weight.
+        {/* CELEBRATION SECTION */}
+        <section className="section-padding celebration-section">
+          <div className="container">
+            <Reveal className="celebration-card">
+              <div className="celebration-left">
+                <div className="pill-badge gold-pill">
+                  <Gift size={14} />
+                  <span>SPECIAL GIFTING IN SALEM</span>
+                </div>
+                <h2 className="celebration-title">Made-to-Order Celebration Gift Boxes</h2>
+                <p className="celebration-desc">
+                  Order custom birthday brownies, blondie boxes, and artisanal chocolates in Salem.
+                  Complete with personalized messages and festive gift packing. Share your event date on WhatsApp to book a fresh order.
                 </p>
+                <MagneticButton
+                  onClick={() => openWhatsApp('Celebration Brownie Box Salem')}
+                  className="btn-primary"
+                >
+                  <MessageCircle size={18} />
+                  Pre-order a celebration box
+                </MagneticButton>
+              </div>
+
+              <div className="celebration-right-grid">
+                {[
+                  { icon: Calendar, label: 'Birthday Cakes & Bakes' },
+                  { icon: Sparkles, label: 'Festive Hampers' },
+                  { icon: Gift, label: 'Return Gifts Salem' },
+                  { icon: Star, label: 'Special Occasions' },
+                ].map((box, i) => (
+                  <Reveal delay={i * 80} key={box.label} className="feature-mini-box">
+                    <box.icon className="box-icon" />
+                    <h3>{box.label}</h3>
+                  </Reveal>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* MASALA INTRO SECTION */}
+        <section id="masala" className="section-padding masala-hero-section">
+          <div className="container">
+            <Reveal className="masala-intro-grid">
+              <div className="masala-img-column">
+                <TiltCard className="masala-img-wrapper">
+                  <SafeImage
+                    src={MASALA_INTRO_IMAGE}
+                    alt="Traditional homemade masala and spice powder in Salem"
+                    className="masala-main-img"
+                    fallbackEmoji="🌶️"
+                    fallbackLabel="GR Home Made Masala Salem"
+                  />
+                  <div className="gold-stamp">
+                    <span>100%</span>
+                    <small>HOMEMADE</small>
+                  </div>
+                </TiltCard>
+              </div>
+
+              <div className="masala-content-column">
+                <span className="brand-tag masala-tag">GR HOME MADE MASALA · SALEM</span>
+                <h2 className="section-title masala-title">
+                  <SplitText text="Traditional Homemade Masalas & Batter" delay={80} />
+                </h2>
+                <p className="section-subtitle masala-desc">
+                  Fresh Idly Maavu (batter), authentic <strong>Idiyappam Maavu</strong>, stone-ground spice powders and traditional kanji premixes prepared in Salem — 
+                  made in small hygienic batches without chemical additives, artificial colors, or preservatives.
+                </p>
+
+                <ul className="masala-benefits-list">
+                  {[
+                    '100% Natural, zero artificial preservatives or colors',
+                    'Fresh Idly Maavu Batter in Salem (Min order: 5 kg — ₹780)',
+                    'Traditional Idiyappam Maavu & stone-ground spice powders',
+                    'Hygienically prepared in clean home kitchen in Salem',
+                  ].map((text, i) => (
+                    <motion.li
+                      key={text}
+                      initial={{ opacity: 0, x: -15 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * i, duration: 0.4 }}
+                      viewport={{ once: true }}
+                    >
+                      <CheckCircle2 className="benefit-icon" /> {text}
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <div className="masala-cta-group">
+                  <MagneticButton
+                    onClick={() => openWhatsApp('Homemade Masala Salem Order')}
+                    className="btn-gold"
+                  >
+                    Order Homemade Masalas
+                  </MagneticButton>
+                  <div className="delivery-badge-pill">
+                    <Truck size={16} />
+                    <span>DELIVERY CHARGES AS PER WEIGHT</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* MASALA PRODUCTS SHOWCASE */}
+            <div className="masala-products-wrapper">
+              <Reveal className="section-header text-center">
+                <h3 className="sub-section-title">Fresh Batter, Spices &amp; Kanji Premixes</h3>
+                <p className="section-subtitle">
+                  Authentic Tamil recipes ground fresh in Salem for healthy everyday meals.
+                </p>
+              </Reveal>
+
+              {/* WEIGHT NOTICE BANNER */}
+              <div className="weight-notice-banner">
+                <Info size={18} className="notice-icon" />
+                <span>
+                  <strong>Note:</strong> Delivery charges are calculated based on total package weight for all orders from Salem.
+                </span>
+              </div>
+
+              <div className="masala-grid">
+                {mainMasalaProducts.map((masala, i) => (
+                  <Reveal delay={(i % 4) * 80} key={masala.id} as="article">
+                    <TiltCard className="masala-card">
+                      <div className="masala-card-img-box">
+                        <SafeImage
+                          src={masala.image}
+                          alt={masala.altText}
+                          className="masala-img"
+                          fallbackEmoji={masala.fallbackEmoji}
+                        />
+                        <span className="nature-badge">
+                          <Leaf size={12} /> {masala.badge}
+                        </span>
+                        <div className="masala-card-overlay" />
+                      </div>
+
+                      <div className="masala-card-body">
+                        <div className="masala-header-row">
+                          <span className="masala-emoji">{masala.icon}</span>
+                          <h3 className="masala-card-title">{masala.name}</h3>
+                        </div>
+                        <p className="masala-card-slogan">"{masala.slogan}"</p>
+                        <p className="masala-card-desc">{masala.description}</p>
+
+                        <div className="price-tag-list masala-price-list">
+                          {masala.prices.map((pTier) => (
+                            <div key={pTier.size} className="price-pill masala-pill">
+                              <span className="price-size">{pTier.size}</span>
+                              <span className="price-val">{pTier.price}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="masala-purity-tags">
+                          <span>✓ Stone-Ground in Salem</span>
+                          <span>✓ Preservative Free</span>
+                          <span>
+                            {masala.minOrder ? '✓ Min Order: 5 kg' : '✓ Made Fresh'}
+                          </span>
+                        </div>
+
+                        <button
+                          onClick={() => openWhatsApp(`${masala.name} Salem`)}
+                          className="masala-order-btn"
+                          aria-label={`Order ${masala.name} on WhatsApp`}
+                        >
+                          <MessageCircle size={16} />
+                          Order on WhatsApp
+                        </button>
+                      </div>
+                    </TiltCard>
+                  </Reveal>
+                ))}
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="delivery-steps-grid">
+        {/* DELIVERY INFO SECTION */}
+        <section className="section-padding delivery-info-section">
+          <div className="container">
+            <Reveal className="delivery-info-card">
+              <div className="delivery-header">
+                <div className="days-badge-circle">
+                  <span>7</span>
+                  <small>DAYS</small>
+                </div>
+                <div className="delivery-title-area">
+                  <h2>Delivery Process &amp; Fast Orders in Salem</h2>
+                  <p>
+                    Every spice powder, batter, and bakery item is freshly prepared upon order in Salem to maintain high nutritional value, authentic aroma, and taste. Standard delivery charges apply based on total weight.
+                  </p>
+                </div>
+              </div>
+
+              <div className="delivery-steps-grid">
+                {[
+                  { num: '01', title: 'Order on WhatsApp', desc: 'Select your bakes or masala quantities and message us' },
+                  { num: '02', title: 'Weight & Payment', desc: 'We calculate order weight and share exact doorstep delivery costs' },
+                  { num: '03', title: 'Made Fresh in Salem', desc: 'Stone-ground and freshly baked in clean home kitchen' },
+                  { num: '04', title: 'Prompt Delivery', desc: 'Hygienically packed and delivered within 7 days' },
+                ].map((step, i) => (
+                  <Reveal delay={i * 90} key={step.num} className="step-card">
+                    <span className="step-num">{step.num}</span>
+                    <h3>{step.title}</h3>
+                    <p>{step.desc}</p>
+                  </Reveal>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* PROMISE SECTION */}
+        <section id="delivery" className="section-padding delivery-process-section">
+          <div className="container text-center">
+            <Reveal className="section-header">
+              <span className="brand-tag">WHY CHOOSE US IN SALEM</span>
+              <h2>Why Choose GR Home Bakers &amp; Home Made Masala</h2>
+              <p className="section-subtitle">
+                Homemade quality, pure ingredients, and zero shortcuts for Salem households.
+              </p>
+            </Reveal>
+
+            <div className="process-grid">
               {[
-                { num: '01', title: 'Message us', desc: 'Send your requirement & quantities on WhatsApp' },
-                { num: '02', title: 'Weight & Payment', desc: 'We calculate delivery cost by weight and confirm' },
-                { num: '03', title: 'Packed hygienically', desc: 'Freshly stone-ground and packed' },
-                { num: '04', title: 'Delivered in 7 days', desc: 'Reliable delivery straight to your doorstep' },
+                {
+                  icon: MessageCircle,
+                  title: '1. Easy Direct Booking',
+                  desc: 'Send your choice or customized requirements directly through WhatsApp.',
+                },
+                {
+                  icon: Flame,
+                  title: '2. Fresh Small Batches',
+                  desc: 'Prepared in Salem with natural ingredients following traditional family recipes.',
+                },
+                {
+                  icon: Scale,
+                  title: '3. Hygienic Packaging',
+                  desc: 'Airtight packaging to lock in freshness, priced fairly by weight.',
+                },
+                {
+                  icon: Truck,
+                  title: '4. Reliable Salem Delivery',
+                  desc: 'Local doorstep pickup/delivery across Salem, Tamil Nadu.',
+                },
               ].map((step, i) => (
-                <Reveal delay={i * 90} key={step.num} className="step-card">
-                  <span className="step-num">{step.num}</span>
-                  <h4>{step.title}</h4>
+                <Reveal delay={i * 100} key={step.title} className="process-step">
+                  <div className="icon-circle">
+                    <step.icon size={24} />
+                  </div>
+                  <h3>{step.title}</h3>
                   <p>{step.desc}</p>
                 </Reveal>
               ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* DELIVERY PROCESS SECTION */}
-      <section id="delivery" className="section-padding delivery-process-section">
-        <div className="container text-center">
-          <Reveal className="section-header">
-            <span className="brand-tag">OUR PROMISE</span>
-            <h2 className="section-title">
-              Freshly made. Carefully packed. Delivered with love.
-            </h2>
-            <p className="section-subtitle">
-              How we get delicious bakes, idly batter and aromatic masalas to your kitchen.
-            </p>
-          </Reveal>
-
-          <div className="process-grid">
-            {[
-              {
-                icon: MessageCircle,
-                title: '1. Order',
-                desc: 'Send your choice or requirements directly to our WhatsApp number.',
-              },
-              {
-                icon: Flame,
-                title: '2. Prepare',
-                desc: 'Made fresh in small batches using wholesome traditional recipes.',
-              },
-              {
-                icon: Scale,
-                title: '3. Weigh & Pack',
-                desc: 'Hygienically packed. Delivery charges calculated as per package weight.',
-              },
-              {
-                icon: Truck,
-                title: '4. Deliver',
-                desc: 'Prompt local pickup/delivery & powder/batter delivery within 7 days.',
-              },
-            ].map((step, i) => (
-              <Reveal delay={i * 100} key={step.title} className="process-step">
-                <div className="icon-circle">
-                  <step.icon size={24} />
-                </div>
-                <h3>{step.title}</h3>
-                <p>{step.desc}</p>
-              </Reveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ORDER CTA SECTION */}
-      <section id="order" className="section-padding cta-section">
-        <div className="container text-center">
-          <Reveal className="cta-box">
-            <div className="cta-glow" aria-hidden="true" />
-            <h2 className="cta-title">Ready to taste homemade goodness?</h2>
-            <p className="cta-text">
-              Fresh bakes, Idly Maavu (batter min. 5 kg — ₹780), traditional masalas and premixes — made especially for you.
-            </p>
-            <div className="cta-buttons">
-              <MagneticButton
-                onClick={() => openWhatsApp()}
-                className="btn-primary btn-large"
-              >
-                <MessageCircle size={20} />
-                Order on WhatsApp
-              </MagneticButton>
-              <button
-                onClick={() => scrollToSection('masala')}
-                className="btn-secondary-light btn-large"
-              >
-                Explore Masala &amp; Premixes
-              </button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+        {/* ORDER CTA SECTION */}
+        <section id="order" className="section-padding cta-section">
+          <div className="container text-center">
+            <Reveal className="cta-box">
+              <div className="cta-glow" aria-hidden="true" />
+              <h2>Order Homemade Products in Salem</h2>
+              <p className="cta-text">
+                Fresh bakes, Idly Maavu (batter min. 5 kg — ₹780), traditional Idiyappam Maavu, stone-ground masalas and kanji premixes made with love in Salem, Tamil Nadu.
+              </p>
+              <div className="cta-buttons">
+                <MagneticButton
+                  onClick={() => openWhatsApp('Order Homemade Products Salem')}
+                  className="btn-primary btn-large"
+                >
+                  <MessageCircle size={20} />
+                  Place Your Order Today
+                </MagneticButton>
+                <button
+                  onClick={() => scrollToSection('masala')}
+                  className="btn-secondary-light btn-large"
+                >
+                  Explore Masala &amp; Premixes
+                </button>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       {/* FOOTER */}
       <footer className="footer">
         <div className="container footer-grid">
           <div className="footer-col brand-col">
             <div className="footer-logo">
-              <img src={logoImg} alt="GR Home Bakers Logo" className="footer-logo-img" />
+              <img src={logoImg} alt="GR Home Bakers Salem Logo" className="footer-logo-img" />
               <div>
                 <h3 className="footer-brand-title">GR Home Bakers</h3>
-                <span className="footer-brand-sub">GR Home Made Masala</span>
+                <span className="footer-brand-sub">GR Home Made Masala · Salem</span>
               </div>
             </div>
-            <p className="footer-tagline">"Homemade with love, baked for happiness."</p>
+            <p className="footer-tagline">"Homemade with love, baked and ground for happiness in Salem."</p>
             <div className="fssai-pill">
               <ShieldCheck size={16} />
               <span>
@@ -1208,7 +1238,7 @@ export default function App() {
           </div>
 
           <div className="footer-col contact-col">
-            <h4>Get in Touch</h4>
+            <h3>Get in Touch</h3>
             <ul className="footer-contacts">
               <li>
                 <Phone size={16} className="contact-icon" />
@@ -1226,13 +1256,13 @@ export default function App() {
               </li>
               <li>
                 <MapPin size={16} className="contact-icon" />
-                <span>Salem, Tamil Nadu</span>
+                <span>Salem, Tamil Nadu, India</span>
               </li>
             </ul>
           </div>
 
           <div className="footer-col links-col">
-            <h4>Quick Links</h4>
+            <h3>Quick Links</h3>
             <ul className="footer-links">
               <li>
                 <button onClick={() => scrollToSection('bakes')}>Fresh Bakery Specials</button>
@@ -1244,7 +1274,7 @@ export default function App() {
                 <button onClick={() => scrollToSection('delivery')}>Delivery Process</button>
               </li>
               <li>
-                <button onClick={() => openWhatsApp()}>Custom Orders</button>
+                <button onClick={() => openWhatsApp('Custom Order Salem')}>Custom Orders</button>
               </li>
             </ul>
           </div>
@@ -1256,7 +1286,7 @@ export default function App() {
       </footer>
 
       {/* FLOATING WHATSAPP BUTTON */}
-      <MagneticButton onClick={() => openWhatsApp()} className="floating-whatsapp">
+      <MagneticButton onClick={() => openWhatsApp()} className="floating-whatsapp" aria-label="Order on WhatsApp">
         <MessageCircle size={22} className="wa-floating-icon" />
         <span className="wa-floating-text">Order on WhatsApp</span>
       </MagneticButton>
